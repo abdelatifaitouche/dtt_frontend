@@ -7,7 +7,7 @@ function App() {
       <section className="flex flex-col justify-center items-center h-screen bg-gradient-to-r from-purple-500 to-pink-500 bg-gray-400 bg-blend-multiply h-screen dark:bg-gray-900">
                 <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-12">
                     <a href="https://www.grantthornton.dz/" className="inline-flex items-center justify-between px-1 py-1 pr-4 text-sm text-gray-700 bg-gray-100 rounded-full mb-7 dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700" role="alert">
-                        <img src={require('../src/assets/logo_gt.png')} style={{width : 50 + 'px'}} /><span className="text-sm font-medium">Grant Thornton Algeria</span>
+                        <img alt="Description of the image" src={require('../src/assets/logo_gt.png')} style={{width : 50 + 'px'}} /><span className="text-sm font-medium">Grant Thornton Algeria</span>
                         <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
                     </a>
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white">We invest in the Latest Technologies</h1>
