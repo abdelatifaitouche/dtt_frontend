@@ -10,17 +10,13 @@ export default function NavBar(){
     const [showMenu , setShowMenu] = React.useState(true)
     let { user, logoutUser } = useContext(AuthContext)
 
-    const [username , setUsername] = useState('')
   const toggleMenu = ()=>{
     setShowMenu(prev => !prev);
     console.log(showMenu);
   }
 
-  const [res , setRes] = useState('')
+  const [username , setUsername] = useState(()=>localStorage.getItem('authTokens')?jwtDecode(localStorage.getItem('authTokens')).username :"")
 
-  console.log('from nav bar')
-  console.log(localStorage.getItem('authTokens'))
- 
 
 
 
@@ -42,12 +38,12 @@ export default function NavBar(){
             </a>
             <a href="#" class="flex items-center ps-2.5 mb-5">
 
-                <h1 class="mb-4 text-sm font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-sm dark:text-white"><span class="text-purple-600 dark:text-blue-500">Welcome,{username}</span></h1>
+                <h1 class="mb-4 text-sm font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-sm dark:text-white"><span class="text-purple-600 dark:text-blue-500">Welcome, </span>{username}</h1>
             </a>
             <div>
                 <li>
                 
-                    <Link to="/"
+                    <Link to="/dashboard"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
