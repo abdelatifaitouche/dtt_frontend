@@ -19,7 +19,7 @@ const useAxios = ()=>{
         },
     
     }
-    ).access
+    )
 
     axiosInstance.interceptors.request.use(async req => {
         const user = jwtDecode(authTokens.access)

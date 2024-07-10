@@ -1,100 +1,99 @@
-import {createContext , useState , useEffect} from 'react'
-import { jwtDecode } from 'jwt-decode'
+import { createContext, useState, useEffect } from 'react'
+import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom'
-
-
 
 const AuthContext = createContext()
 
-export default AuthContext 
+export default AuthContext;
 
-export const AuthProvider = ({children})=>{
+export const AuthProvider = ({children}) => {
+
+    
 
     const API_URL_AUTH_TOKEN = "https://dtt-production.up.railway.app/api/token/"
     const API_URL_REFRESH_TOKEN = "https://dtt-production.up.railway.app/api/token/refresh/"
     const API_URL_REGISTER = 'https://dtt-production.up.railway.app/api/register/'
 
+    let [user, setUser] = useState(() => (localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null))
+    let [authTokens, setAuthTokens] = useState(() => (localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null))
+    let [loading, setLoading] = useState(true)
 
-    const [authTokens , setAuthTokens] = useState(()=>{
-        localStorage.getItem('authTokens')?
-        JSON.parse(localStorage.getItem('authTokens')):
-        null
-    })
+    const navigate = useNavigate()
 
-    const [user , setUser] = useState(()=>{
-        localStorage.getItem('authTokens')?
-        jwtDecode(localStorage.getItem('authTokens')):
-        null
-    })
-
-
-    const [loading , setLoading] = useState(true)
-
-    const history = useNavigate()
-
-    const loginUser = async (email , password)=>{
-        const response = await fetch(API_URL_AUTH_TOKEN , {
-            method : 'POST',
-            headers : {
-                "Content-Type" :'application/json'
+    let loginUser = async (e) => {
+        e.preventDefault()
+        const response = await fetch(API_URL_AUTH_TOKEN, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body : JSON.stringify({email , password})
+            body: JSON.stringify({email: e.target.email.value, password: e.target.password.value })
+        });
+
+        let data = await response.json();
+
+        if(data){
+            localStorage.setItem('authTokens', JSON.stringify(data));
+            setAuthTokens(data)
+            setUser(jwtDecode(data.access))
+            navigate('/dashboard')
+        } else {
+            alert('Something went wrong while logging in the user!')
+        }
+    }
+
+    let logoutUser = (e) => {
+        e.preventDefault()
+        localStorage.removeItem('authTokens')
+        setAuthTokens(null)
+        setUser(null)
+        navigate('/login')
+    }
+
+    const updateToken = async () => {
+        const response = await fetch(API_URL_REFRESH_TOKEN, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({refresh:authTokens?.refresh})
         })
 
         const data = await response.json()
-        console.log(data)
-
-        if(response.status === 200){
-            console.log('logged in')
+        if (response.status === 200) {
             setAuthTokens(data)
             setUser(jwtDecode(data.access))
-            localStorage.setItem('authToken' , JSON.stringify(data))
-            history('/')
+            localStorage.setItem('authTokens',JSON.stringify(data))
+        } else {
+            logoutUser()
+        }
 
-        }else{
-            console.log(response.status)
-            alert('somehitng went wrong')
+        if(loading){
+            setLoading(false)
         }
     }
 
-    const registerUser = async (email , username , password , password2) =>{
-        const response = await fetch(API_URL_REGISTER, {
-            method : 'POST',
-            headers : {
-                'Content-Type' : 'application/json'
-            },
-            body : JSON.stringify({email , username , password , password2})
-        })
-
-        if(response.status === 201){
-            history('/login')
-
-        }else{
-            alert('something went wrong')
-        }
-    }
-
-    const logoutUser = ()=>{
-        setAuthTokens(null)
-        setUser(null)
-        localStorage.removeItem('authTokens')
-        history('/login')
-    }
-
-    const ContextData = {
-        user , setUser , authTokens , setAuthTokens , registerUser , loginUser , logoutUser
+    let contextData = {
+        user:user,
+        authTokens:authTokens,
+        loginUser:loginUser,
+        logoutUser:logoutUser,
     }
 
     useEffect(()=>{
-        if(authTokens){
-            setUser(jwtDecode(authTokens.access))
-        }
-        setLoading(false)
-    } , [authTokens , loading])
+        const REFRESH_INTERVAL = 1000 * 60 * 4 // 4 minutes
+        let interval = setInterval(()=>{
+            if(authTokens){
+                updateToken()
+            }
+        }, REFRESH_INTERVAL)
+        return () => clearInterval(interval)
+
+    },[authTokens])
 
     return(
-        <AuthContext.Provider value={ContextData}>
-            {loading?null : children}
+        <AuthContext.Provider value={contextData}>
+            {children}
         </AuthContext.Provider>
     )
 }
