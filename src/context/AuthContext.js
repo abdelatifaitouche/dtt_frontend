@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 const AuthContext = createContext()
 
@@ -37,8 +38,26 @@ export const AuthProvider = ({children}) => {
             setAuthTokens(data)
             setUser(jwtDecode(data.access))
             navigate('/dashboard')
+            Swal.fire({
+                title : 'logged In',
+                icon : 'success',
+                toast : 'true',
+                timer : '3000',
+                position : 'top-right',
+                showConfirmButton : 'false'
+                
+            })
         } else {
             alert('Something went wrong while logging in the user!')
+            Swal.fire({
+                title : 'Please, Verifiy your Informations',
+                icon : 'error',
+                toast : 'true',
+                timer : '3000',
+                position : 'top-right',
+                showConfirmButton : 'false'
+                
+            })
         }
     }
 
@@ -48,6 +67,15 @@ export const AuthProvider = ({children}) => {
         setAuthTokens(null)
         setUser(null)
         navigate('/login')
+        Swal.fire({
+            title : 'logged Out',
+            icon : 'success',
+            toast : 'true',
+            timer : '3000',
+            position : 'top-right',
+            showConfirmButton : 'false'
+            
+        })
     }
 
     const updateToken = async () => {

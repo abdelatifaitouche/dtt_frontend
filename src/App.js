@@ -7,9 +7,12 @@ import Homepage from './views/Homepage'
 import PrivateRoute from './utils/PrivateRoute'
 import { AuthProvider } from './context/AuthContext';
 import Chatbot from './views/Chatbot';
+import Preloader from './preloader/Preloader';
 
 function App() {
     return (
+        <>
+        <Preloader/>
         <div className="App">
         <Router>
             <AuthProvider>
@@ -23,6 +26,8 @@ function App() {
             </AuthProvider>
         </Router>
     </div>
+        </>
+        
     );
 }
 
