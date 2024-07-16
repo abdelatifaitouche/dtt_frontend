@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 function Threedot() {
+
+
     const loadingContainer = {
         width: '100%',
         textAlign: 'center',
@@ -11,6 +13,9 @@ function Threedot() {
         justifyContent: 'center'
     };
 
+
+    
+
     const loadingCircle = {
         display: 'block',
         width: '0.5rem',
@@ -19,6 +24,9 @@ function Threedot() {
         borderRadius: '0.25rem',
         margin: '0.25rem'
     };
+
+
+
 
     const loadingContainerVariants = {
         start: {
