@@ -34,7 +34,7 @@ export default function NavBar() {
                     <ul class="space-y-2 font-medium">
                         <a href="#" class="flex items-center ps-2.5 mb-5">
                             <img src={require('../assets/logo_gt.png')} class="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
-                            <span class="self-center text-l font-semibold whitespace-nowrap dark:text-white">AI Consultant</span>
+                            <span class="self-center items-center text-md font-bold text-black-600 dark:text-white md:text-md lg:text-md">Tax-Advisor <span class="text-transparent bg-clip-text bg-gradient-to-r to-green-500 from-purple-800">PRO</span></span>
                         </a>
                         <a href="#" class="flex items-center ps-2.5 mb-5">
 

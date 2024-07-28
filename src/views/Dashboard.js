@@ -6,6 +6,7 @@ import axios from 'axios'
 import { waveform } from 'ldrs'
 import Services from '../Components/Services'
 import Redevences from '../Components/Redevences'
+import Dividendes from '../Components/Dividendes'
 waveform.register()
 
 
@@ -110,8 +111,9 @@ function Dashboard() {
                     </div>
 
                 }
-                 {mode === 'Services' ? <Services countries = {data} /> : <div></div>}
-                {mode === 'Redevences' ? <Redevences countries = {data} /> : <div></div>}
+                {mode === 'Services' ? <Services countries={data} /> : <div></div>}
+                {mode === 'Redevences' ? <Redevences countries={data} /> : <div></div>}
+                {mode === 'Dividendes' ? <Dividendes countries={data} /> : <div></div>}
 
 
             </div>

@@ -93,7 +93,7 @@ function Services({countries}) {
                                     speed="1"
                                     color="black"
                                 ></l-waveform>: ''}
-                            {apiResponse.answer && <ReactTyped strings={[apiResponse.answer]} typeSpeed={20} />}
+                            {apiResponse.answer && <ReactTyped className='mb-4 text-xl font-bold text-gray-600 dark:text-white md:text-2xl lg:text-xl' strings={[apiResponse.answer]} typeSpeed={20} />}
                         </div>
                     </div>
 
