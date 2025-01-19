@@ -29,7 +29,7 @@ function Services({countries}) {
         setApiResponse('')
         setLoading(true)
         try {
-            const response = await axios.post('https://dtt-production.up.railway.app/api/services/', {
+            const response = await axios.post('http://127.0.0.1:8000/api/services/', {
                 country_id: formData.country_id,
                 max_presence: formData.max_presence
             }, {
@@ -37,9 +37,9 @@ function Services({countries}) {
                     'Content-Type': 'application/json',
                 }
             });
-            console.log(response.data);
+            console.log(response.data.answer[0].reponse);
             
-            setApiResponse(response.data)
+            setApiResponse(response.data.answer[0].reponse)
             setLoading(false)
 
         } catch (error) {
@@ -80,7 +80,7 @@ function Services({countries}) {
 
                         </select>
                         <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            name='max_presence' placeholder='max presence' onChange={handleInputChange} />
+                            name='max_presence' placeholder='Max presence Days' max='365' min='0' type='number' onChange={handleInputChange} />
                         <button class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2" type="submit">filter</button>
                     </form>
 
@@ -93,7 +93,7 @@ function Services({countries}) {
                                     speed="1"
                                     color="black"
                                 ></l-waveform>: ''}
-                            {apiResponse.answer && <ReactTyped className='mb-4 text-xl font-bold text-gray-600 dark:text-white md:text-2xl lg:text-xl' strings={[apiResponse.answer]} typeSpeed={20} />}
+                            {apiResponse && <div dangerouslySetInnerHTML={{__html:apiResponse}}/> }
                         </div>
                     </div>
 

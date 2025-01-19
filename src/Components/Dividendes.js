@@ -27,11 +27,12 @@ function Dividendes({ countries }) {
         setLoading(true)
         axios({
             method: "GET",
-            url: `https://dtt-production.up.railway.app/api/dividendes/${countryID}`,
+            url: `http://127.0.0.1:8000/api/dividendes/${countryID}`,
             headers: {
                 Authorization: `Bearer ${authTokens.access}`,
             },
         }).then((response) => {
+            console.log(response.status)
             console.log(response.data.country_conditions)
             setApiResponse(response.data.country_conditions)
             setLoading(false)

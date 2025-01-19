@@ -6,8 +6,7 @@ waveform.register()
 
 
 
-function Redevences({ countries }) {
-
+function Intrests({ countries }) {
 
 
 
@@ -23,16 +22,17 @@ function Redevences({ countries }) {
 
 
 
-    const getRedevences = (e) => {
+    const getIntrests = (e) => {
         e.preventDefault()
         setLoading(true)
         axios({
             method: "GET",
-            url: `http://127.0.0.1:8000/api/redevences/${countryID}`,
+            url: `http://127.0.0.1:8000/api/intrests/${countryID}`,
             headers: {
                 Authorization: `Bearer ${authTokens.access}`,
             },
         }).then((response) => {
+            console.log(response.status)
             console.log(response.data.country_conditions)
             setApiResponse(response.data.country_conditions)
             setLoading(false)
@@ -44,7 +44,7 @@ function Redevences({ countries }) {
             <div className='dashboard' class="block p-6 bg-white border border-gray-200 rounded-lg shadow">
 
                 <h1 class="mb-4 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-xl dark:text-white">Please, select a <span class="text-purple-600 dark:text-blue-500">Country</span> To learn more</h1>
-                <form onSubmit={getRedevences} class="flex items-center justify-center  gap-2 my-7" >
+                <form onSubmit={getIntrests} class="flex items-center justify-center  gap-2 my-7" >
                     <select onChange={handleInputChange} options={countries} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name='country_id'>
                         <option defaultValue>
                             Select Country
@@ -100,4 +100,4 @@ function Redevences({ countries }) {
     )
 }
 
-export default Redevences
+export default Intrests
