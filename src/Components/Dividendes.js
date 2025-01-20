@@ -21,13 +21,14 @@ function Dividendes({ countries }) {
     const [loading, setLoading] = useState(true)
 
 
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const getDividendes = (e) => {
         e.preventDefault()
         setLoading(true)
         axios({
             method: "GET",
-            url: `http://127.0.0.1:8000/api/dividendes/${countryID}`,
+            url: `${apiUrl}dividendes/${countryID}`,
             headers: {
                 Authorization: `Bearer ${authTokens.access}`,
             },

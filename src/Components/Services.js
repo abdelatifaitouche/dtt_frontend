@@ -11,6 +11,7 @@ waveform.register()
 function Services({countries}) {
 
     const { authTokens } = useContext(AuthContext)
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const [formData, setFormData] = useState({
         country_id: 0,
@@ -29,7 +30,7 @@ function Services({countries}) {
         setApiResponse('')
         setLoading(true)
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/services/', {
+            const response = await axios.post(`${apiUrl}services/`, {
                 country_id: formData.country_id,
                 max_presence: formData.max_presence
             }, {

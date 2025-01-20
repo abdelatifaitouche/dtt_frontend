@@ -21,6 +21,7 @@ function Redevences({ countries }) {
     const { authTokens } = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
 
+    const apiUrl = process.env.REACT_APP_API_URL;
 
 
     const getRedevences = (e) => {
@@ -28,7 +29,7 @@ function Redevences({ countries }) {
         setLoading(true)
         axios({
             method: "GET",
-            url: `http://127.0.0.1:8000/api/redevences/${countryID}`,
+            url: `${apiUrl}redevences/${countryID}`,
             headers: {
                 Authorization: `Bearer ${authTokens.access}`,
             },

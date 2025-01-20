@@ -17,8 +17,9 @@ waveform.register()
 
 
 function Dashboard() {
+    const apiUrl = process.env.REACT_APP_API_URL;
 
-    const API_COUNTRIES = 'http://127.0.0.1:8000/api/countries/'
+    const API_COUNTRIES = `${apiUrl}countries/`
 
 
     const [mode, setMode] = useState('view')

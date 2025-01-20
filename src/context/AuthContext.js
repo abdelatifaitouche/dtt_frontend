@@ -9,11 +9,11 @@ export default AuthContext;
 
 export const AuthProvider = ({children}) => {
 
-    
+    const apiUrl = process.env.REACT_APP_API_URL;
 
-    const API_URL_AUTH_TOKEN = "http://127.0.0.1:8000/api/token/"
-    const API_URL_REFRESH_TOKEN = "http://127.0.0.1:8000/api/token/refresh/"
-    const API_URL_REGISTER = 'http://127.0.0.1:8000/api/register/'
+    const API_URL_AUTH_TOKEN = `${apiUrl}token/`;
+    const API_URL_REFRESH_TOKEN = `${apiUrl}token/refresh/`
+    const API_URL_REGISTER = `${apiUrl}register/`
 
     let [user, setUser] = useState(() => (localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null))
     let [authTokens, setAuthTokens] = useState(() => (localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null))

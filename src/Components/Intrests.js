@@ -20,6 +20,7 @@ function Intrests({ countries }) {
     const { authTokens } = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
 
+    const apiUrl = process.env.REACT_APP_API_URL;
 
 
     const getIntrests = (e) => {
@@ -27,7 +28,7 @@ function Intrests({ countries }) {
         setLoading(true)
         axios({
             method: "GET",
-            url: `http://127.0.0.1:8000/api/intrests/${countryID}`,
+            url: `${apiUrl}intrests/${countryID}`,
             headers: {
                 Authorization: `Bearer ${authTokens.access}`,
             },
