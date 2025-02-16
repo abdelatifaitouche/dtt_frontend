@@ -108,20 +108,30 @@ function Dashboard() {
                                         stroke="3.5"
                                         speed="1"
                                         color="black"
-                                    ></l-waveform> :
+                                    >
+
+                                    </l-waveform>
+                                    
+                                    :
+                                    
                                     <select onChange={handleChange} id="small" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected>Choose a Revenue Type</option>
                                         <option value="Services">Services</option>
                                         <option value="Dividendes">Dividendes</option>
                                         <option value="Intrests">Intrests</option>
                                         <option value="Redevences">Redevences</option>
-                                    </select>}
+                                    </select>
+                                
+                                }
 
 
                             </form>
 
 
-                        </div> :
+                        </div>
+                        
+                        :
+
                         <div>
 
                         </div>
