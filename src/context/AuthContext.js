@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const AuthContext = createContext()
 
@@ -63,6 +64,38 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+
+    let RegisterUser = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(API_URL_REGISTER, JSON.stringify({
+                email: e.target.email.value, 
+                username: e.target.Username.value, 
+                password: e.target.password.value,
+                password2: e.target.password.value
+            }), {
+                headers: { "Content-Type": "application/json" }
+            });
+            Swal.fire({
+                title : 'Register',
+                icon : 'success',
+                toast : 'true',
+                timer : '3000',
+                position : 'top-right',
+                showConfirmButton : 'false'
+                
+            })
+    
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    
+
+
+
+
     let logoutUser = (e) => {
         e.preventDefault()
         localStorage.removeItem('authTokens')
@@ -108,7 +141,8 @@ export const AuthProvider = ({children}) => {
         authTokens:authTokens,
         loginUser:loginUser,
         logoutUser:logoutUser,
-        loading
+        loading,
+        RegisterUser : RegisterUser
     }
 
     useEffect(()=>{

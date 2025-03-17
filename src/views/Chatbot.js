@@ -4,11 +4,16 @@ import AnswerBox from '../Components/AnswerBox';
 import axios from 'axios';
 
 function Chatbot() {
-  const RAG_API = "https://rag-api-la3x.onrender.com/?query=";
+  //const RAG_API = "https://rag-api-la3x.onrender.com/?query=";
+  const RAG_API = "http://127.0.0.1:8080/?query="
 
   const [question, setQuestion] = useState("");
   const [chatList, setChatlist] = useState([]); // List to store all chats
   const [isLoading, setIsLoading] = useState(false);
+
+
+
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -24,18 +29,21 @@ function Chatbot() {
     setIsLoading(true); // Set loading state to true while waiting for AI response
 
     // Prepare the API URL with the user's question
-    const prompt = `${RAG_API}${encodeURIComponent(userQuestion)}`;
+    //const prompt = `${RAG_API}${encodeURIComponent(userQuestion)}`;
+
+    const prompt = `https://simple-gemini.onrender.com/home?query=${encodeURIComponent(userQuestion)}`
+
     console.log(prompt);
 
     try {
       const response = await axios.get(prompt); // Send the request to the API
-      console.log(response.data); // Log the AI response
+      //console.log(response); // Log the AI response
 
       // Update the chatList with the AI response
       setChatlist((prev) =>
         prev.map((chat) =>
           chat.prompt === userQuestion
-            ? { ...chat, response: response.data } // Add response to the prompt
+            ? { ...chat, response: response.data.response } // Add response to the prompt
             : chat
         )
       );
@@ -67,6 +75,8 @@ function Chatbot() {
             </div>
           ))}
         </div>
+
+        <AnswerBox message={""} sender={false}/>
 
         {/* Form to submit questions */}
         <form onSubmit={handleSubmit}>
