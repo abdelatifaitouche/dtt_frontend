@@ -8,6 +8,7 @@ import PrivateRoute from './utils/PrivateRoute'
 import { AuthProvider } from './context/AuthContext';
 import Chatbot from './views/Chatbot';
 import Preloader from './preloader/Preloader';
+import EmailVerification from './views/EmailVerification';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/chatbot" element={<PrivateRoute><Chatbot/></PrivateRoute>} />
 
                     <Route path="/login" element={<LoginPage/>}/>
+                    <Route path ="/verify-email/:token" element={<EmailVerification/>}/>
                 </Routes>
             </AuthProvider>
         </Router>
