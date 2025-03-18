@@ -3,7 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const API_VERIFY_EMAIL = "http://127.0.0.1:8000/api/verify-email/";
+//const API_VERIFY_EMAIL = "http://127.0.0.1:8000/api/verify-email/";
+const API_VERIFY_EMAIL = "http://gtdtt.digital/api/verify-email/"
 
 const EmailVerification = () => {
     const { token } = useParams();
