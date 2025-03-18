@@ -67,15 +67,18 @@ export const AuthProvider = ({children}) => {
 
     let RegisterUser = async (e) => {
         e.preventDefault();
+        setLoading(true)
         try {
             const response = await axios.post(API_URL_REGISTER, JSON.stringify({
                 email: e.target.email.value, 
                 username: e.target.Username.value, 
                 password: e.target.password.value,
-                password2: e.target.password.value
+                password2: e.target.password.value,
+                accepted_terms : e.target.termsconditions.value
             }), {
                 headers: { "Content-Type": "application/json" }
             });
+        setLoading(false)
             Swal.fire({
                 title : 'Register',
                 icon : 'success',
@@ -88,7 +91,7 @@ export const AuthProvider = ({children}) => {
     
             console.log(response);
         } catch (error) {
-            console.log(error);
+            console.log(error.response.request.response);
         }
     };
     

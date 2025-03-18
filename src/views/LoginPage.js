@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import LoginForm from "../Components/LoginForm";
 import RegisterForm from "../Components/RegisterForm";
+import TermsPopUp from "../Components/TermsPopUp";
 
 function Login() {
   const [showLogin, setShowLogin] = useState(true);
+  const [showTermsModal, setShowTermsModal] = useState(false); // ✅ Modal state
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center px-6 py-1">
-      <div className="flex flex-col md:flex-row items-center  w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="flex flex-col md:flex-row items-center w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
         {/* Left Side: Image & Text */}
-        <div className="hidden md:flex h-[100vh] flex-col items-center justify-center w-1/2  p-1 text-black text-center">
+        <div className="hidden md:flex h-[100vh] flex-col items-center justify-center w-1/2 p-1 text-black text-center">
           <img
             src="assets/corporate_bg.jpg"
             alt="Login Illustration"
@@ -19,7 +21,6 @@ function Login() {
 
         {/* Right Side: Login/Register */}
         <div className="w-full md:w-1/2 p-6 dark:bg-gray-800">
-          {/* Wrapper for smooth transitions */}
           <div className="relative w-full">
             <div
               className={`transition-opacity duration-500 ${
@@ -37,22 +38,23 @@ function Login() {
                   : "opacity-100 scale-100"
               }`}
             >
-              {!showLogin && <RegisterForm />}
+              {!showLogin && <RegisterForm onShowTerms={() => setShowTermsModal(true)} />}
             </div>
           </div>
           <button
-            className="mt-1 px-2 py-2 text-blue-600 rounded-lg  transition-all w-full"
+            className="mt-1 px-2 py-2 text-blue-600 rounded-lg transition-all w-full"
             onClick={() => setShowLogin(!showLogin)}
           >
             {showLogin ? "Create an account" : "Login to your account"}
           </button>
+
           {/* Switch Button */}
           <a
             href="#"
-            class="flex items-center justify-center mt-3 text-sm font-bold leading-tight tracking-tight text-gray-900 dark:text-white"
+            className="flex items-center justify-center mt-3 text-sm font-bold leading-tight tracking-tight text-gray-900 dark:text-white"
           >
             <img
-              class="w-8 h-8 mr-2"
+              className="w-8 h-8 mr-2"
               src={require("../assets/logo_gt.png")}
               alt="logo"
             />
@@ -60,6 +62,9 @@ function Login() {
           </a>
         </div>
       </div>
+
+      {/* ✅ Fullscreen Terms Modal */}
+      {showTermsModal && <TermsPopUp onClose={() => setShowTermsModal(false)} />}
     </section>
   );
 }
