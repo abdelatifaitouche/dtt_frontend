@@ -73,14 +73,15 @@ export const AuthProvider = ({children}) => {
                 email: e.target.email.value, 
                 username: e.target.Username.value, 
                 password: e.target.password.value,
-                password2: e.target.password.value,
-                accepted_terms : e.target.termsconditions.value
+                password2: e.target.password2.value,
+                accepted_terms : e.target.termsconditions.checked
             }), {
                 headers: { "Content-Type": "application/json" }
             });
+            console.log(response)
         setLoading(false)
             Swal.fire({
-                title : 'Register',
+                title : 'Please, Verify your email to Login',
                 icon : 'success',
                 toast : 'true',
                 timer : '3000',
@@ -91,7 +92,16 @@ export const AuthProvider = ({children}) => {
     
             console.log(response);
         } catch (error) {
-            console.log(error.response.request.response);
+            setLoading(false)
+            Swal.fire({
+                title : 'Please, Verify your Informations',
+                icon : 'error',
+                toast : 'true',
+                timer : '3000',
+                position : 'top-right',
+                showConfirmButton : 'false'
+                
+            })
         }
     };
     
