@@ -22,17 +22,18 @@ function Chatbot() {
     ]);
 
     setIsLoading(true); // Set loading state to true while waiting for AI response
-
-    const prompt = `https://simple-gemini.onrender.com/home?query=${encodeURIComponent(userQuestion)}`;
+    //http://127.0.0.1:8000/rag/ragchain/whoareyou
+    const prompt = `http://gtdtt.digital/rag/ragchain/${encodeURIComponent(userQuestion)}`;
 
     try {
       const response = await axios.get(prompt); // Send the request to the API
 
+      console.log("from chatbot" , response)
       // Update the chatList with the AI response
       setChatlist((prev) =>
         prev.map((chat) =>
           chat.prompt === userQuestion
-            ? { ...chat, response: response.data.response } // Add response to the prompt
+            ? { ...chat, response: response.data.data } // Add response to the prompt
             : chat
         )
       );
@@ -56,7 +57,8 @@ function Chatbot() {
             {/* Map through the chat list to display all prompts and responses */}
             {chatList.map((chat, index) => (
               <div key={index}>
-                <AnswerBox message={chat.prompt} sender={true} />
+                <AnswerBox message={chat.prompt} sender={true}  />
+                <br></br>
                 {/* Show loading spinner or empty until AI response is received */}
                 {isLoading && chat.response === "" ? (
                   <AnswerBox message="..." sender={false} />
