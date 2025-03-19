@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
-import { Bot, House, Menu, X  } from "lucide-react";
+import { Bot, House, LogOut, Menu, X  } from "lucide-react";
 
 export default function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -82,6 +82,7 @@ export default function NavBar() {
               onClick={logoutUser}
               className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 w-full"
             >
+                <LogOut/>
               <span className="ml-3">Sign Out</span>
             </button>
 
