@@ -23,7 +23,7 @@ function Chatbot() {
 
     setIsLoading(true); // Set loading state to true while waiting for AI response
     //http://127.0.0.1:8000/rag/ragchain/whoareyou
-    const prompt = `http://gtdtt.digital/rag/ragchain/${encodeURIComponent(userQuestion)}`;
+    const prompt = `http://gtdtt.digital/api/rag/ragchain/${encodeURIComponent(userQuestion)}`;
 
     try {
       const response = await axios.get(prompt); // Send the request to the API
@@ -73,6 +73,7 @@ function Chatbot() {
             {/* Form to submit questions */}
             <form onSubmit={handleSubmit} className="flex items-center">
               <textarea
+                required
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 id="chat"

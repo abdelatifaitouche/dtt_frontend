@@ -48,10 +48,11 @@ function Services({ countries }) {
     }
 
     return (
-        <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h1 className="mb-4 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-xl lg:text-2xl dark:text-white">
+        <div className="p-6 mt-1 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <h1 className="mb-1 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-xl lg:text-2xl dark:text-white">
                 Please, select a <span className="text-purple-600 dark:text-blue-500">Country</span> To learn more
             </h1>
+            <p className='text-sm text-gray-600'>Enter the maximum number of days of <b>presence</b> in Algeria within the fiscal year.</p>
             <form className="flex flex-col sm:flex-row items-center justify-center gap-2 my-7" onSubmit={sendServiceData}>
                 <select
                     name="country_id"
@@ -66,11 +67,12 @@ function Services({ countries }) {
                     ))}
                 </select>
                 <input
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-auto sm:max-w-xs p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-3/4 md:w-1/2 lg:w-1/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="max_presence"
                     placeholder="Max presence Days"
                     max="365"
                     min="0"
+                    required
                     type="number"
                     onChange={handleInputChange}
                 />

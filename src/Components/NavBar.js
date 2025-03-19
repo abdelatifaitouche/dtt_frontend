@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
-import { Menu, X } from "lucide-react";
+import { Bot, House, Menu, X  } from "lucide-react";
 
 export default function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -54,7 +54,8 @@ export default function NavBar() {
 
             {/* Navigation Links */}
             <ul className="space-y-2 font-medium">
-              <li>
+              <li className="flex items-center">
+              <House/>
                 <Link
                   to="/dashboard"
                   className="flex items-center p-2 rounded-lg text-gray-900 hover:bg-gray-100"
@@ -62,7 +63,8 @@ export default function NavBar() {
                   <span className="ml-3">Dashboard</span>
                 </Link>
               </li>
-              <li>
+              <li className="flex items-center">
+              <Bot/>
                 <Link
                   to="/chatbot"
                   className="flex items-center p-2 rounded-lg text-gray-900 hover:bg-gray-100"
@@ -70,14 +72,7 @@ export default function NavBar() {
                   <span className="ml-3">Chatbot</span>
                 </Link>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center p-2 rounded-lg text-gray-900 hover:bg-gray-100"
-                >
-                  <span className="ml-3">Help</span>
-                </a>
-              </li>
+              
             </ul>
           </div>
 
