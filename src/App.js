@@ -20,7 +20,7 @@ function App() {
                 <Routes>
                     <Route path ="/" element={<Homepage/>}/>
                     <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
-                    <Route path="/chatbot" element={<PrivateRoute><Chatbot/></PrivateRoute>} />
+                    {/*<Route path="/chatbot" element={<PrivateRoute><Chatbot/></PrivateRoute>} />*/}
 
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path ="/verify-email/:token" element={<EmailVerification/>}/>
