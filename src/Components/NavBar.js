@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
-import { Bot, House, LogOut, Menu, X  } from "lucide-react";
+import { Bot, House, LogOut, Menu, X } from "lucide-react";
 
 export default function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -55,7 +55,7 @@ export default function NavBar() {
             {/* Navigation Links */}
             <ul className="space-y-2 font-medium">
               <li className="flex items-center">
-              <House/>
+                <House />
                 <Link
                   to="/dashboard"
                   className="flex items-center p-2 rounded-lg text-gray-900 hover:bg-gray-100"
@@ -63,8 +63,9 @@ export default function NavBar() {
                   <span className="ml-3">Dashboard</span>
                 </Link>
               </li>
-              <li className="flex items-center">
-              <Bot/>
+
+              {/**<li className="flex items-center">
+                   * <Bot/>
                 <Link
                   to="/chatbot"
                   className="flex items-center p-2 rounded-lg text-gray-900 hover:bg-gray-100"
@@ -72,7 +73,7 @@ export default function NavBar() {
                   <span className="ml-3">Chatbot</span>
                 </Link>
               </li>
-              
+                   */}
             </ul>
           </div>
 
@@ -82,7 +83,7 @@ export default function NavBar() {
               onClick={logoutUser}
               className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 w-full"
             >
-                <LogOut/>
+              <LogOut />
               <span className="ml-3">Sign Out</span>
             </button>
 
